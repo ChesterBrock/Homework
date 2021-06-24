@@ -22,18 +22,16 @@ import model.AssistantJack;
 
 public class RandomClue {
 
-    /*
-     * ALGORITHM:
+    /* 
+     * ALGORITHM: (*** New ***: i have to find a way that the case is solved in less than 20 cases each time)
      *
-     * PROMPT "Which theory to test? (1, 2, 3[random]): "
-     * READ answerSet
-     * INSTANTIATE jack = new AssistantJack(answerSet)
-     * DO
-     *      weapon = random int between 1 and 6
-     *      location = random int between 1 and 10
-     *      murder = random int between 1 and 6
-     *      solution = jack.checkAnswer(weapon, location, murder)
-     * WHILE solution != 0
+     *	1). Prompt the the user for witch theory they would like to test(1,2,3)
+     *	2). Read in the answer they choose for answerSet
+     *	3). INSTANTIATE jack = new AssistantJack(answerSet)
+     *	4). To test for solution (the random may have to be removed)
+     *	5). Bring "solution = jack.checkAnswer(weapon, location, murder);" outside the do-while loop
+     *  6). Keep looping as long as there is not a perfect match with the solution. 
+     *  7). Display results to user.
      *
      * OUTPUT "Total checks = " + jack.getTimesAsked()
      * IF jack.getTimesAsked() is greater than 20 THEN
@@ -50,26 +48,45 @@ public class RandomClue {
      */
     public static void main(String[] args) {
         // DECLARATION + INITIALIZATION
-        int answerSet, solution, murder, weapon, location;
+        int answerSet, solution, murder = 1, weapon = 1, location = 1 ;
         Theory answer;
         AssistantJack jack;
         Scanner keyboard = new Scanner(System.in);
         Random random = new Random();
 
         // INPUT
-        System.out.print("Which theory would like you like to test? (1, 2, 3[random]): ");
+        System.out.print("Which theory would you like to test? (1, 2, 3[random]): "); // correction on sentence format. 
         answerSet = keyboard.nextInt();
         keyboard.close();
 
         // PROCESSING
         jack = new AssistantJack(answerSet);
-
-        do {
-            weapon = random.nextInt(6) + 1;
+        
+        solution = jack.checkAnswer(weapon, location, murder); // pulling outside the loop to check
+        													   // for base .checkAnswer(1,1,1) * Note: need to assign variables to 1 for starting value.
+        
+        // Caution : changing do-while to a while loop because i don't want to loop at least once before checking the solution 
+        while(solution != 0) { // this will keep looping as long as there is not a perfect match 
+        	
+        	// changing the random so i don't get over a maximum of 20 cases each time. 
+        	switch (solution) {
+        		case 1:
+        			weapon++; //trying next weapon
+        			break;
+        		case 2:
+        			location++; // trying next location 
+        			break;
+        		case 3:
+        			murder++;  //trying next murder
+        			break;
+        	
+        	/*weapon = random.nextInt(6) + 1;
             location = random.nextInt(10) + 1;
-            murder = random.nextInt(6) + 1;
-            solution = jack.checkAnswer(weapon, location, murder);
-        } while (solution != 0);
+            murder = random.nextInt(6) + 1;*/
+        	}
+        	solution = jack.checkAnswer(weapon, location, murder);
+            
+        }
 
         answer = new Theory(weapon, location, murder);
 

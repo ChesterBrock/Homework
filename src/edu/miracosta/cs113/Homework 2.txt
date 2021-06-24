@@ -1,0 +1,8 @@
+How often do you get a solution in fewer than 20 guesses? Does this change depending on the theory you test (1, 2, 3)?
+
+	Before I made edits to the program I was getting few to non under 20.. test case two being the most because it seems to have checked every single case. After the edited I am getting under 20 case cases in each. 
+
+
+What is good or bad about this strategy?
+	
+	With random. Its all about luck and you never know whats going come out the other side. I'm guessing thats a bad thing unless your guess actually turns out better than the forced method. 

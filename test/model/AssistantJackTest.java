@@ -10,9 +10,10 @@ package model;
  *  @TODO   test for errors, test rest of assistant jack methods
  */
 
-import org.junit.Test;              //for @Test
-import org.junit.Assert;   //for asserTrue() method
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 public class AssistantJackTest {
     /**
